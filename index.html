@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cổng tiếp nhận phản ánh, kiến nghị - MTTQ Việt Nam phường Mông Dương</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Gradient banner chuẩn màu theo cổng Mặt Trận Số */
+    .banner-mttq {
+      background: linear-gradient(100deg, #b91c1c 0%, #dc2626 40%, #ea580c 80%, #f97316 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    /* Hiệu ứng hoa văn chìm */
+    .banner-mttq::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(circle at 80% 50%, rgba(255,255,255,0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .card-header-red {
+      background-color: #d32f2f;
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body class="bg-[#f4f6f9] text-gray-800 font-sans min-h-screen flex flex-col justify-between select-none">
+
+  <!-- ==================== BANNER ĐẦU TRANG CHUẨN MẶT TRẬN SỐ ==================== -->
+  <header class="w-full shadow-md">
+    <!-- Phần thân banner chính (Đỏ sang Cam có đồ họa) -->
+    <div class="banner-mttq py-5 sm:py-7 px-4 sm:px-8">
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+        
+        <!-- Cụm Logo + Tiêu đề cơ quan -->
+        <div class="flex items-center space-x-4 sm:space-x-5 text-center md:text-left">
+          <!-- Logo MTTQ dạng tròn viền vàng -->
+          <div class="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#bf1d1d] border-2 border-yellow-300 shadow-lg flex-shrink-0 flex items-center justify-center">
+            <div class="w-13 h-13 sm:w-16 sm:h-16 rounded-full border border-yellow-300/60 flex flex-col items-center justify-center text-yellow-300">
+              <i class="fa-solid fa-star text-xl sm:text-2xl drop-shadow"></i>
+              <span class="text-[7px] sm:text-[8px] font-bold uppercase tracking-tighter mt-0.5">Mặt Trận</span>
+            </div>
+          </div>
+
+          <!-- Dòng tiêu đề chữ to rực rỡ -->
+          <div>
+            <h1 class="text-white text-lg sm:text-2xl lg:text-3xl font-extrabold uppercase tracking-wide drop-shadow-md">
+              ỦY BAN MẶT TRẬN TỔ QUỐC VIỆT NAM PHƯỜNG MÔNG DƯƠNG
+            </h1>
+            <h2 class="text-yellow-300 text-xs sm:text-base lg:text-lg font-bold uppercase tracking-wider mt-1 drop-shadow">
+              CỔNG TIẾP NHẬN, XỬ LÝ PHẢN ÁNH, KIẾN NGHỊ CỦA NHÂN DÂN
+            </h2>
+          </div>
+        </div>
+
+        <!-- Biểu tượng đồ họa chuyển đổi số bên phải (ẩn trên mobile bé) -->
+        <div class="hidden lg:flex items-center space-x-2 text-white/90 pr-4">
+          <div class="p-3 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 text-center">
+            <i class="fa-solid fa-laptop-file text-3xl text-yellow-300"></i>
+            <div class="text-[10px] font-semibold uppercase tracking-wider mt-1">Mặt Trận Số 24/7</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Thanh Menu điều hướng đỏ thẫm bên dưới banner -->
+    <nav class="bg-[#991b1b] border-t border-red-800 text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-8 flex items-center justify-between">
+        <div class="flex items-center">
+          <a href="index.html" class="px-5 py-3 text-xs sm:text-sm font-bold bg-[#7f1d1d] text-white flex items-center border-b-2 border-yellow-300">
+            <i class="fa-solid fa-pen-to-square mr-2"></i> Gửi Phản ánh, Kiến nghị
+          </a>
+          <a href="tra-cuu.html" class="px-5 py-3 text-xs sm:text-sm font-semibold text-red-100 hover:text-white hover:bg-[#881818] transition flex items-center">
+            <i class="fa-solid fa-magnifying-glass mr-2"></i> Tra cứu hồ sơ
+          </a>
+        </div>
+        <div class="text-[11px] sm:text-xs text-red-200 hidden sm:block">
+          <i class="fa-solid fa-location-dot mr-1 text-yellow-300"></i> TP Cẩm Phả, Tỉnh Quảng Ninh
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ==================== FORM CHÍNH ==================== -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full space-y-6">
+
+    <form id="paknForm" class="space-y-6">
+
+      <!-- KHỐI 1: KHAI BÁO THÔNG TIN -->
+      <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+        <div class="card-header-red px-5 py-3 font-semibold text-sm sm:text-base tracking-wide flex items-center">
+          <i class="fa-solid fa-user-pen mr-2 text-white/90"></i> Khai báo thông tin
+        </div>
+        
+        <div class="p-5 sm:p-7 space-y-5">
+          <!-- Hàng 1: Họ tên - SĐT - Email -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            <div>
+              <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1.5">Họ và tên <span class="text-red-600 font-bold">*</span></label>
+              <input type="text" id="fullname" required minlength="3" placeholder="Nhập họ và tên" 
+                     class="w-full px-3.5 py-2 sm:py-2.5 border border-gray-300 rounded-lg text-sm text-gray-900 focus:ring-1 focus:ring-red-600 focus:border-red-600 focus:outline-none transition">
+            </div>
+            <div>
+              <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1.5">Số điện thoại <span class="text-red-600 font-bold">*</span></label>
+              <input type="tel" id="phone" required pattern="0[0-9]{9}" maxlength="10" placeholder="Nhập số điện thoại (10 số)" 
+                     class="w-full px-3.5 py-2 sm:py-2.5 border border-gray-300 rounded-lg text-sm text-gray-900 focus:ring-1 focus:ring-red-600 focus:border-red-600 focus:outline-none transition">
+            </div>
+            <div class="md:col-span-2 lg:col-span-1">
+              <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1.5">Email <span class="text-gray-400 font-normal text-xs">(Không bắt buộc)</span></label>
+              <input type="email" id="email" placeholder="Nhập email để nhận mã tra cứu tự động" 
+                     class="w-full px-3.5 py-2 sm:py-2.5 border border-gray-300 rounded-lg text-sm text-gray-900 focus:ring-1 focus:ring-red-600 focus:border-red-600 focus:outline-none transition">
+            </div>
+          </div>
+
+          <!-- Hàng 2: Tỉnh/TP - Xã/Phường - Thôn/Khu phố -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            <div>
+              <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1.5">Tỉnh / Thành phố <span class="text-red-600 font-bold">*</span></label>
+              <input type="text" value="Tỉnh Quảng Ninh" readonly 
+                     class="w-full px-3.5 py-2 sm:py-2.5 border border-gray-200 bg-gray-50 rounded-lg text-sm text-gray-700 font-medium focus:outline-none cursor-not-allowed">
+            </div>
+            <div>
+              <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1.5">Xã / Phường / Đặc khu <span class="text-red-600 font-bold">*</span></label>
+              <input type="text" value="Phường Mông Dương" readonly 
+                     class="w-full px-3.5 py-2 sm:py-2.5 border border-gray-200 bg-gray-50 rounded-lg text-sm text-gray-700 font-medium focus:outline-none cursor-not-allowed">
+            </div>
+            <div class="md:col-span-2 lg:col-span-1">
+              <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1.5">Thôn / Bản / Tổ dân phố (Khu) <span class="text-red-600 font-bold">*</span></label>
+              <select id="location" required class="w-full px-3.5 py-2 sm:py-2.5 border border-gray-300 rounded-lg text-sm text-gray-900 focus:ring-1 focus:ring-red-600 focus:border-red-600 focus:outline-none transition bg-white">
+                <option value="">-- Chọn khu phố / thôn cư trú --</option>
+                <option value="Khu 1">Khu 1</option>
+                <option value="Khu 2">Khu 2</option>
+                <option value="Khu 3">Khu 3</option>
+                <option value="Khu 4">Khu 4</option>
+                <option value="Khu 5">Khu 5</option>
+                <option value="Khu 6">Khu 6</option>
+                <option value="Thôn Đồng Mỏ">Thôn Đồng Mỏ</option>
+                <option value="Thôn Dương Huy 1">Thôn Dương Huy 1</option>
+                <option value="Thôn Dương Huy 2">Thôn Dương Huy 2</option>
+                <option value="Khu vực khác">Khu vực khác</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Hàng 3: CCCD -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            <div>
+              <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1.5">Số CCCD <span class="text-red-600 font-bold">*</span></label>
+              <input type="text" id="cccd" required pattern="[0-9]{12}" maxlength="12" placeholder="Nhập số căn cước công dân (12 số)" 
+                     class="w-full px-3.5 py-2 sm:py-2.5 border border-gray-300 rounded-lg text-sm text-gray-900 focus:ring-1 focus:ring-red-600 focus:border-red-600 focus:outline-none transition">
+              <span class="text-[11px] text-gray-400 mt-1 block">Tự động đối chiếu theo quy chuẩn 63 tỉnh/thành của Bộ Công an</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- KHỐI 2: NỘI DUNG PHẢN ÁNH -->
+      <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+        <div class="card-header-red px-5 py-3 font-semibold text-sm sm:text-base tracking-wide flex items-center">
+          <i class="fa-solid fa-file-lines mr-2 text-white/90"></i> Nội dung phản ánh
+        </div>
+
+        <div class="p-5 sm:p-7 space-y-5">
+          <!-- Lĩnh vực phản ánh -->
+          <div>
+            <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1.5">Lĩnh vực phản ánh, kiến nghị <span class="text-red-600 font-bold">*</span></label>
+            <select id="category" required class="w-full px-3.5 py-2 sm:py-2.5 border border-gray-300 rounded-lg text-sm text-gray-900 focus:ring-1 focus:ring-red-600 focus:border-red-600 focus:outline-none transition bg-white">
+              <option value="">Chọn lĩnh vực</option>
+              <option value="An ninh, trật tự, an toàn xã hội">An ninh, trật tự, an toàn xã hội</option>
+              <option value="Các kiến nghị, phản ánh gửi tới Kỳ họp thứ 9, Quốc hội khoá XV đã hoặc chưa được xem xét, giải quyết">Các kiến nghị, phản ánh gửi tới Kỳ họp thứ 9, Quốc hội khoá XV đã hoặc chưa được xem xét, giải quyết</option>
+              <option value="Công tác dân tộc, tôn giáo">Công tác dân tộc, tôn giáo</option>
+              <option value="Công tác đối ngoại Đảng, Nhà nước, đối ngoại nhân dân">Công tác đối ngoại Đảng, Nhà nước, đối ngoại nhân dân</option>
+              <option value="Công tác phòng, chống tham nhũng, lãng phí, tiêu cực">Công tác phòng, chống tham nhũng, lãng phí, tiêu cực</option>
+              <option value="Đất đai, bất động sản, nhà ở">Đất đai, bất động sản, nhà ở</option>
+              <option value="Kiến nghị khác">Kiến nghị khác</option>
+              <option value="Nội vụ, tiếp công dân, giải quyết kiến nghị của cử tri và nhân dân">Nội vụ, tiếp công dân, giải quyết kiến nghị của cử tri và nhân dân</option>
+              <option value="Phát triển kinh tế">Phát triển kinh tế</option>
+              <option value="Vấn đề bảo vệ môi trường, ứng phó biến đổi khí hậu">Vấn đề bảo vệ môi trường, ứng phó biến đổi khí hậu</option>
+              <option value="Văn hóa - Xã hội, y tế, giáo dục">Văn hóa - Xã hội, y tế, giáo dục</option>
+            </select>
+          </div>
+
+          <!-- Tiêu đề phản ánh -->
+          <div>
+            <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1.5">Tiêu đề phản ánh <span class="text-red-600 font-bold">*</span></label>
+            <input type="text" id="title" required minlength="6" placeholder="Tóm tắt ngắn gọn nội dung phản ánh" 
+                   class="w-full px-3.5 py-2 sm:py-2.5 border border-gray-300 rounded-lg text-sm text-gray-900 focus:ring-1 focus:ring-red-600 focus:border-red-600 focus:outline-none transition">
+          </div>
+
+          <!-- Nội dung chi tiết -->
+          <div>
+            <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1.5">Chi tiết nội dung phản ánh <span class="text-red-600 font-bold">*</span></label>
+            <textarea id="content" rows="4" required minlength="15" placeholder="Nêu cụ thể địa điểm, thời gian, diễn biến sự việc cần kiến nghị (tối thiểu 15 ký tự)..." 
+                      class="w-full px-3.5 py-2.5 border border-gray-300 rounded-lg text-sm text-gray-900 focus:ring-1 focus:ring-red-600 focus:border-red-600 focus:outline-none transition leading-relaxed"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nút gửi -->
+      <div class="text-center pt-2">
+        <button type="submit" id="btnSubmit" class="w-full sm:w-auto bg-[#c02626] hover:bg-[#a81f1f] text-white font-semibold py-3 px-10 rounded-lg shadow-md hover:shadow-lg text-sm sm:text-base transition duration-200">
+          <i class="fa-solid fa-paper-plane mr-2"></i> Gửi phản ánh, kiến nghị
+        </button>
+      </div>
+
+    </form>
+
+    <!-- Hộp thông báo kết quả gửi thành công -->
+    <div id="resultBox" class="hidden p-6 bg-white border border-green-300 rounded-xl shadow text-center space-y-3">
+      <div class="w-14 h-14 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto text-2xl">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <h3 class="text-lg font-bold text-gray-900">Gửi phản ánh, kiến nghị thành công!</h3>
+      <p class="text-sm text-gray-600" id="emailNoteText">Mã hồ sơ tra cứu của bạn:</p>
+      
+      <div class="inline-flex items-center space-x-2 bg-gray-50 px-4 py-2 rounded-lg border border-gray-200">
+        <span id="refCode" class="font-mono font-bold text-red-600 text-base sm:text-lg"></span>
+        <button type="button" onclick="copyCode()" class="text-xs text-gray-600 hover:text-gray-900 bg-white border border-gray-300 hover:bg-gray-100 px-2.5 py-1.5 rounded transition">
+          <i class="fa-regular fa-copy mr-1"></i> Sao chép
+        </button>
+      </div>
+
+      <p class="text-xs text-gray-500 max-w-xl mx-auto">Thông tin đã được chuyển tiếp đến Ban Thường trực Ủy ban MTTQ phường Mông Dương để thẩm tra và xử lý theo quy định.</p>
+      
+      <div class="pt-2">
+        <a id="directSearchLink" href="tra-cuu.html" class="inline-block text-xs sm:text-sm font-semibold text-white bg-red-700 hover:bg-red-800 px-5 py-2.5 rounded-lg shadow transition">
+          Chuyển sang trang tra cứu hồ sơ <i class="fa-solid fa-arrow-right ml-1"></i>
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-gray-300 py-6 text-xs border-t mt-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-1">
+      <p class="font-bold text-white uppercase text-xs sm:text-sm">Ủy ban Mặt trận Tổ quốc Việt Nam phường Mông Dương</p>
+      <p>Địa chỉ: Phường Mông Dương, Thành phố Cẩm Phả, Tỉnh Quảng Ninh</p>
+      <p class="text-gray-400">Hệ thống thông tin tiếp nhận, xử lý phản ánh kiến nghị trực tuyến</p>
+    </div>
+  </footer>
+
+  <script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz1--7yJemYsStWblAMuXurNF1E-QJRYvondmffxf6jDrlDiuNDEg9iEwGTHrOae5HP/exec";
+
+    // Danh bạ 63 tỉnh/thành phố theo quy chuẩn CCCD của Bộ Công an
+    const PROVINCE_CODES = [
+      "001", "002", "004", "006", "008", "010", "011", "012", "014", "015", 
+      "017", "019", "020", "022", "024", "025", "026", "027", "030", "031", 
+      "033", "034", "035", "036", "037", "038", "040", "042", "044", "045", 
+      "046", "048", "049", "051", "052", "054", "056", "058", "060", "062", 
+      "064", "066", "067", "068", "070", "072", "074", "075", "077", "079", 
+      "080", "082", "083", "084", "086", "087", "089", "091", "092", "093", 
+      "094", "095", "096"
+    ];
+
+    function validateCCCD(cccd) {
+      if (!/^[0-9]{12}$/.test(cccd)) {
+        return { valid: false, message: "Số CCCD phải bao gồm chính xác 12 chữ số." };
+      }
+
+      const provCode = cccd.substring(0, 3);
+      if (!PROVINCE_CODES.includes(provCode)) {
+        return { valid: false, message: `Mã tỉnh/thành (${provCode}) ở 3 chữ số đầu không tồn tại trong danh mục CCCD của Bộ Công an. Vui lòng kiểm tra lại.` };
+      }
+
+      const genderCentury = parseInt(cccd.charAt(3), 10);
+      if (![0, 1, 2, 3].includes(genderCentury)) {
+        return { valid: false, message: "Chữ số thứ 4 của CCCD không hợp lệ theo quy chuẩn giới tính và thế kỷ sinh." };
+      }
+
+      const birthYearSuffix = parseInt(cccd.substring(4, 6), 10);
+      const currentYearSuffix = new Date().getFullYear() % 100;
+      if ((genderCentury === 2 || genderCentury === 3) && birthYearSuffix > currentYearSuffix) {
+        return { valid: false, message: "Năm sinh trên số CCCD không hợp lệ." };
+      }
+
+      const randomSuffix = cccd.substring(6);
+      if (/^(\d)\1{5}$/.test(randomSuffix)) {
+        return { valid: false, message: "Số CCCD không hợp lệ (dãy số cuối bị trùng lặp)." };
+      }
+
+      return { valid: true };
+    }
+
+    function generateRefCode() {
+      const now = new Date();
+      const pad = (n) => String(n).padStart(2, '0');
+      const timeStr = `${now.getFullYear()}${pad(now.getMonth()+1)}${pad(now.getDate())}${pad(now.getHours())}${pad(now.getMinutes())}`;
+      const rand = Math.random().toString(36).substring(2, 7).toUpperCase();
+      return `PAKN-${timeStr}-${rand}`;
+    }
+
+    function copyCode() {
+      const code = document.getElementById('refCode').innerText;
+      navigator.clipboard.writeText(code);
+      alert("Đã sao chép mã hồ sơ: " + code);
+    }
+
+    document.getElementById('paknForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const phone = document.getElementById('phone').value.trim();
+      const cccd = document.getElementById('cccd').value.trim();
+
+      if (!/^0[0-9]{9}$/.test(phone)) {
+        alert("Vui lòng nhập số điện thoại hợp lệ gồm 10 chữ số (bắt đầu bằng số 0).");
+        document.getElementById('phone').focus();
+        return;
+      }
+
+      const checkCCCD = validateCCCD(cccd);
+      if (!checkCCCD.valid) {
+        alert(checkCCCD.message);
+        document.getElementById('cccd').focus();
+        return;
+      }
+
+      const btn = document.getElementById('btnSubmit');
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Đang gửi thông tin...';
+
+      const refCode = generateRefCode();
+      const emailVal = document.getElementById('email').value.trim();
+
+      const payload = {
+        refCode: refCode,
+        fullname: document.getElementById('fullname').value.trim(),
+        phone: phone,
+        email: emailVal,
+        cccd: cccd,
+        location: document.getElementById('location').value,
+        category: document.getElementById('category').value,
+        title: document.getElementById('title').value.trim(),
+        content: document.getElementById('content').value.trim()
+      };
+
+      try {
+        await fetch(SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        document.getElementById('refCode').innerText = refCode;
+        document.getElementById('directSearchLink').href = `tra-cuu.html?code=${refCode}`;
+        
+        const noteEl = document.getElementById('emailNoteText');
+        if (emailVal) {
+          noteEl.innerHTML = `Mã hồ sơ đã được gửi về email <b>${emailVal}</b> và hiển thị bên dưới:`;
+        } else {
+          noteEl.innerText = "Bạn không điền email, vui lòng lưu hoặc sao chép mã hồ sơ bên dưới:";
+        }
+
+        document.getElementById('resultBox').classList.remove('hidden');
+        this.reset();
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+      } catch (err) {
+        alert("Lỗi khi gửi dữ liệu: " + err.message);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-paper-plane mr-2"></i> Gửi phản ánh, kiến nghị';
+      }
+    });
+
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.onkeydown = function(e) {
+      if (e.keyCode == 123) return false;
+      if (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) return false;
+      if (e.ctrlKey && e.keyCode == 85) return false;
+    };
+  </script>
+</body>
+</html>
